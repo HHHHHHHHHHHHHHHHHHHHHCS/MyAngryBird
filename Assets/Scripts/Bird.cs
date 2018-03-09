@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bird : MonoBehaviour
 {
-    private const float maxDistance = 1.25f;
+    private const float maxDistance = 1.5f;
 
     private Camera mainCamera;
     private Transform rightBranchPos;
@@ -35,7 +35,7 @@ public class Bird : MonoBehaviour
     }
 
     private void Update()
-    {
+    { 
         if (isClick)
         {
             transform.position = mainCamera.ScreenToWorldPoint(Input.mousePosition)
