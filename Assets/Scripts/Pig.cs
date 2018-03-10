@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Pig : MonoBehaviour
 {
+    private const float sqrMaxSpeed = 64f;//需要根号
+    private const float sqrMinSpeed = 16f;//需要根号
+
     [SerializeField]
     private Sprite hurtSprite;
     [SerializeField]
@@ -11,8 +14,7 @@ public class Pig : MonoBehaviour
     [SerializeField]
     private GameObject pigScore;
 
-    private const float sqrMaxSpeed = 64f;//需要根号
-    private const float sqrMinSpeed = 16f;//需要根号
+
     private SpriteRenderer sprite;
 
     private void Awake()
@@ -40,11 +42,11 @@ public class Pig : MonoBehaviour
 
     private void Dead()
     {
-        //直接死亡
-        Destroy(gameObject);
         var effect = Instantiate(pigDeadEffect, transform.position, Quaternion.identity);
         Destroy(effect, 2f);
         var score = Instantiate(pigScore, transform.position+Vector3.up, Quaternion.identity);
         Destroy(score, 2f);
+        MainGameManager.Instance.RemovePig(this);
+        Destroy(gameObject);
     }
 }

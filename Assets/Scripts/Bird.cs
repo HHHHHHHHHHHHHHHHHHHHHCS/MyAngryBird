@@ -7,15 +7,23 @@ public class Bird : MonoBehaviour
     private const float maxDistance = 1.5f;
     private static Branch rightBranch;
     private static Branch leftBranch;
+    private static Camera mainCamera;
 
-    private Camera mainCamera;
+    [SerializeField]
+    private GameObject birdDeadEffect;
+
     private bool isClick = false;
     private Rigidbody2D rigi;
     private SpringJoint2D springJoint;
+    private bool isUsed;
 
     private void Awake()
     {
-        mainCamera = Camera.main;
+        if (!mainCamera)
+        {
+            mainCamera = Camera.main;
+        }
+
         rigi = GetComponent<Rigidbody2D>();
         springJoint = GetComponent<SpringJoint2D>();
         if (!rightBranch)
@@ -34,7 +42,6 @@ public class Bird : MonoBehaviour
         isClick = true;
         rigi.isKinematic = true;
     }
-
 
     private void OnMouseUp()
     {
@@ -64,10 +71,43 @@ public class Bird : MonoBehaviour
                 leftBranch.DrawLine(transform);
             }
         }
+
+        if(EndFly())
+        {
+            Next();
+        }
+    }
+
+    public void Enable(Vector3? vec3 = null)
+    {
+        enabled = true;
+        springJoint.enabled = true;
+        if (vec3 != null)
+        {
+            transform.position = (Vector3)vec3;
+        }
+
     }
 
     private void Fly()
     {
         springJoint.enabled = false;
+        isUsed = true;
+    }
+
+    private bool EndFly()
+    {
+        if (isUsed && rigi.velocity.sqrMagnitude <= 0.1f)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private void Next()
+    {
+        Instantiate(birdDeadEffect,transform.position,Quaternion.identity);
+        MainGameManager.Instance.MoveNextBird();
+        Destroy(gameObject);
     }
 }
