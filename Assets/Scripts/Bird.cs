@@ -5,9 +5,10 @@ using UnityEngine;
 public class Bird : MonoBehaviour
 {
     private const float maxDistance = 1.5f;
+    private static Branch rightBranch;
+    private static Branch leftBranch;
 
     private Camera mainCamera;
-    private Transform rightBranchPos;
     private bool isClick = false;
     private Rigidbody2D rigi;
     private SpringJoint2D springJoint;
@@ -17,7 +18,15 @@ public class Bird : MonoBehaviour
         mainCamera = Camera.main;
         rigi = GetComponent<Rigidbody2D>();
         springJoint = GetComponent<SpringJoint2D>();
-        rightBranchPos = GameObject.Find("Branch_Right").transform;
+        if (!rightBranch)
+        {
+            rightBranch = GameObject.Find("Branch/Branch_Right").GetComponent<Branch>();
+        }
+        if (!leftBranch)
+        {
+            leftBranch = GameObject.Find("Branch/Branch_Left").GetComponent<Branch>();
+        }
+
     }
 
     private void OnMouseDown()
@@ -35,18 +44,25 @@ public class Bird : MonoBehaviour
     }
 
     private void Update()
-    { 
+    {
         if (isClick)
         {
             transform.position = mainCamera.ScreenToWorldPoint(Input.mousePosition)
                 - new Vector3(0, 0, mainCamera.transform.position.z);
-            if (Vector3.Distance(transform.position, rightBranchPos.position) >= maxDistance)
+            if (Vector3.Distance(transform.position, rightBranch.transform.position) >= maxDistance)
             {//进行位置限定
-                Vector3 vec3 = (transform.position - rightBranchPos.position).normalized * maxDistance 
-                    +rightBranchPos.position ;  //单位化*最大长度+初始位置
+                Vector3 vec3 = (transform.position - rightBranch.transform.position).normalized * maxDistance
+                    + rightBranch.transform.position;  //单位化*最大长度+初始位置
                 transform.position = vec3;
             }
-
+            if (rightBranch)
+            {
+                rightBranch.DrawLine(transform);
+            }
+            if (leftBranch)
+            {
+                leftBranch.DrawLine(transform);
+            }
         }
     }
 
