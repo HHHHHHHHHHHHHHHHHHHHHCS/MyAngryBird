@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 7f54faac0aa0f654bbbc596164481c55
-timeCreated: 1516415602
+timeCreated: 1520662769
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -539,9 +539,9 @@ TextureImporter:
       name: BIRDS_1_27
       rect:
         serializedVersion: 2
-        x: 303
+        x: 315
         y: 711
-        width: 144
+        width: 131
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -569,7 +569,7 @@ TextureImporter:
         serializedVersion: 2
         x: 170
         y: 703
-        width: 132
+        width: 142
         height: 137
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1085,9 +1085,9 @@ TextureImporter:
       name: BIRDS_1_71
       rect:
         serializedVersion: 2
-        x: 36
+        x: 40
         y: 407
-        width: 133
+        width: 129
         height: 123
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

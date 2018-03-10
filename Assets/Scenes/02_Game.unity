@@ -955,6 +955,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hurtSprite: {fileID: 21300208, guid: 7f54faac0aa0f654bbbc596164481c55, type: 3}
+  pigDeadEffect: {fileID: 1007074735974992, guid: 293bb0ea2f4842143a72de9e1203a45d,
+    type: 2}
+  pigScore: {fileID: 1099071556529866, guid: 64addc4b407f5f048a3708f0429902a2, type: 2}
 --- !u!1 &1138797623
 GameObject:
   m_ObjectHideFlags: 0
