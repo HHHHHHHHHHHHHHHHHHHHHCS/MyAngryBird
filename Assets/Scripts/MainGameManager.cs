@@ -62,8 +62,6 @@ public class MainGameManager : MonoBehaviour
         }
     }
 
-
-
     public void MoveNextBird()
     {
         if (birdsList.Count>1)

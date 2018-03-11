@@ -80,17 +80,24 @@ public class Bird : MonoBehaviour
 
     public void Enable(Vector3? vec3 = null)
     {
-        enabled = true;
-        springJoint.enabled = true;
         if (vec3 != null)
         {
             transform.position = (Vector3)vec3;
         }
-
+        enabled = true;
+        springJoint.enabled = true;
     }
 
     private void Fly()
     {
+        if (rightBranch)
+        {
+            rightBranch.Disable();
+        }
+        if (leftBranch)
+        {
+            leftBranch.Disable();
+        }
         springJoint.enabled = false;
         isUsed = true;
     }

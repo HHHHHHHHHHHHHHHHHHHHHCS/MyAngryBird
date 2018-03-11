@@ -18,7 +18,13 @@ public class Branch : MonoBehaviour
 
     public void DrawLine(Transform target)
     {
+        line.enabled = true;
         line.SetPosition(0, linePos.position);
         line.SetPosition(1, target.position);
+    }
+
+    public void Disable()
+    {
+        line.enabled = false;
     }
 }

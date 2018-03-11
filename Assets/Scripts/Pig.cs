@@ -14,6 +14,8 @@ public class Pig : MonoBehaviour
     [SerializeField]
     private GameObject pigScore;
 
+    private bool isHurt = false;
+
 
     private SpriteRenderer sprite;
 
@@ -35,8 +37,16 @@ public class Pig : MonoBehaviour
         }
         else
         {
-            //让它受伤
-            sprite.sprite = hurtSprite;
+            if(!isHurt)
+            {
+                //让它受伤
+                sprite.sprite = hurtSprite;
+                isHurt = true;
+            }
+            else
+            {
+                Dead();
+            }
         }
     }
 
