@@ -16,6 +16,7 @@ public class Bird : MonoBehaviour
     private Rigidbody2D rigi;
     private SpringJoint2D springJoint;
     private bool isUsed;
+    private BirdTrail birdTrail;
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class Bird : MonoBehaviour
 
         rigi = GetComponent<Rigidbody2D>();
         springJoint = GetComponent<SpringJoint2D>();
+        birdTrail = transform.GetComponentInChildren<BirdTrail>();
         if (!rightBranch)
         {
             rightBranch = GameObject.Find("Branch/Branch_Right").GetComponent<Branch>();
@@ -72,9 +74,18 @@ public class Bird : MonoBehaviour
             }
         }
 
-        if(EndFly())
+        if (EndFly())
         {
             Next();
+        }
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.collider.CompareTag(NameTagLayer.pig)
+            || collision.collider.CompareTag(NameTagLayer.build))
+        {
+            birdTrail.ClearTrail();
         }
     }
 
@@ -98,6 +109,7 @@ public class Bird : MonoBehaviour
         {
             leftBranch.Disable();
         }
+        birdTrail.ShowTrail();
         springJoint.enabled = false;
         isUsed = true;
     }
@@ -113,8 +125,10 @@ public class Bird : MonoBehaviour
 
     private void Next()
     {
-        Instantiate(birdDeadEffect,transform.position,Quaternion.identity);
+        Instantiate(birdDeadEffect, transform.position, Quaternion.identity);
         MainGameManager.Instance.MoveNextBird();
         Destroy(gameObject);
     }
+
+
 }
