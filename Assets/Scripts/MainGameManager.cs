@@ -10,6 +10,12 @@ public class MainGameManager : MonoBehaviour
         private set;
     }
 
+    public MainUIManager mainUIManager
+    {
+        get;
+        private set;
+    }
+
 
     private List<Bird> birdsList;
     private List<Pig> pigsList;
@@ -24,9 +30,14 @@ public class MainGameManager : MonoBehaviour
 
     private void Init()
     {
-
+        InitCompents();
         InitBirds();
         InitPigs();
+    }
+
+    private void InitCompents()
+    {
+        mainUIManager = GameObject.Find("UIRoot").GetComponent<MainUIManager>().Init();
     }
 
     private void InitBirds()
@@ -52,7 +63,7 @@ public class MainGameManager : MonoBehaviour
     {
         pigsList = new List<Pig>();
         Transform parent = GameObject.Find("Pigs").transform;
-        foreach(Transform item in parent)
+        foreach (Transform item in parent)
         {
             var pig = item.GetComponent<Pig>();
             if (pig)
@@ -64,11 +75,35 @@ public class MainGameManager : MonoBehaviour
 
     public void MoveNextBird()
     {
-        if (birdsList.Count>1)
+        birdsList.RemoveAt(0);
+        if (birdsList.Count > 0)
         {
-            birdsList.RemoveAt(0);
+
             birdsList[0].Enable(birdPos);
         }
+        CheckGameState();
+    }
+
+    private void CheckGameState()
+    {
+        if (birdsList.Count <= 0 && pigsList.Count > 0)
+        {
+            FailGame();
+        }
+        else if (birdsList.Count >= 0 && pigsList.Count <= 0)
+        {
+            SucceedGame(birdsList.Count);
+        }
+    }
+
+    private void FailGame()
+    {
+        mainUIManager.ShowFailPanel();
+    }
+
+    private void SucceedGame(int count = 0)
+    {
+        mainUIManager.ShowSucceedPanel(count);
     }
 
     public void RemovePig(Pig pig)
