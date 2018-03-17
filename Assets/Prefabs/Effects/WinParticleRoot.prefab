@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4875723564935570}
   - component: {fileID: 198986030989769198}
   - component: {fileID: 199205414600929180}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: sub2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4084072008814348}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: WinParticleRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4859292088074282}
   - component: {fileID: 198603252073848674}
   - component: {fileID: 199513294472754790}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: sub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1341992517983436}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -960, y: -540, z: 27.9082}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4859292088074282}
@@ -6834,8 +6834,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 471829929
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_RenderMode: 3
   m_SortMode: 0
@@ -6888,8 +6888,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 471829929
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_RenderMode: 3
   m_SortMode: 0
