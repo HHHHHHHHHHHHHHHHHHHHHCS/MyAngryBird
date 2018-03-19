@@ -41,15 +41,22 @@ public class Bird : MonoBehaviour
 
     private void OnMouseDown()
     {
-        isClick = true;
-        rigi.isKinematic = true;
+        if(!isUsed)
+        {
+            isClick = true;
+            rigi.isKinematic = true;
+        }
     }
 
     private void OnMouseUp()
     {
-        isClick = false;
-        rigi.isKinematic = false;
-        Invoke("Fly", 0.1f);
+        if (!isUsed)
+        {
+            isClick = false;
+            rigi.isKinematic = false;
+            isUsed = true;
+            Invoke("Fly", 0.1f);
+        }
     }
 
     private void Update()
@@ -111,7 +118,6 @@ public class Bird : MonoBehaviour
         }
         birdTrail.ShowTrail();
         springJoint.enabled = false;
-        isUsed = true;
     }
 
     private bool EndFly()
