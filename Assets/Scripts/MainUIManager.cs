@@ -20,11 +20,17 @@ public class MainUIManager : MonoBehaviour
 
     public void ShowSucceedPanel(int star = 0)
     {
-        for(int i =1;i<=star;i++)
+        for (int i = 1; i <= star; i++)
         {
-            succeedPanel.transform.Find(NameTagLayer.starImage+i.ToString()).gameObject
-                .SetActive(true);
+            StartCoroutine(ShowStart(i, i * 0.75f));
         }
         succeedPanel.SetActive(true);
+    }
+
+    private IEnumerator ShowStart(int i, float time)
+    {
+        yield return new WaitForSeconds(time);
+        succeedPanel.transform.Find(NameTagLayer.starImage + i.ToString()).gameObject
+            .SetActive(true);
     }
 }

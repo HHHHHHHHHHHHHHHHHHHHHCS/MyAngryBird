@@ -103,7 +103,7 @@ public class MainGameManager : MonoBehaviour
 
     private void SucceedGame(int count = 0)
     {
-        mainUIManager.ShowSucceedPanel(count);
+        mainUIManager.ShowSucceedPanel(Mathf.Clamp(count, 1, 3));
     }
 
     public void RemovePig(Pig pig)
