@@ -33,4 +33,6 @@ public class MainUIManager : MonoBehaviour
         succeedPanel.transform.Find(NameTagLayer.starImage + i.ToString()).gameObject
             .SetActive(true);
     }
+
+
 }
