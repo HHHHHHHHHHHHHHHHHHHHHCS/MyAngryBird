@@ -39,14 +39,19 @@ public class EnemyUnit : MonoBehaviour
             if (!isHurt)
             {
                 //让它受伤
-                sprite.sprite = hurtSprite;
-                isHurt = true;
+                Hurt();
             }
             else
             {
                 Dead();
             }
         }
+    }
+
+    protected virtual void Hurt()
+    {
+        sprite.sprite = hurtSprite;
+        isHurt = true;
     }
 
     protected virtual void Dead()

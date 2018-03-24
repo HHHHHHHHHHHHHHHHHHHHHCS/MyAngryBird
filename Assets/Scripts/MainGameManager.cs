@@ -16,6 +16,12 @@ public class MainGameManager : MonoBehaviour
         private set;
     }
 
+    public MainAudioManager mainAudioManager
+    {
+        get;
+        private set;
+    }
+
 
     private List<Bird> birdsList;
     private List<Pig> pigsList;
@@ -39,6 +45,7 @@ public class MainGameManager : MonoBehaviour
     private void InitCompents()
     {
         mainUIManager = GameObject.Find("UIRoot").GetComponent<MainUIManager>().Init();
+        mainAudioManager = GameObject.Find("MainAudioManager").GetComponent<MainAudioManager>().Init();
     }
 
     private void InitBirds()

@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class Bird : MonoBehaviour
 {
-    private const float maxDistance = 1.5f;
-    private static Branch rightBranch;
-    private static Branch leftBranch;
-    private static Camera mainCamera;
+    protected const float maxDistance = 1.5f;
+    protected static Branch rightBranch;
+    protected static Branch leftBranch;
+    protected static Camera mainCamera;
 
     [SerializeField]
-    private GameObject birdDeadEffect;
+    protected GameObject birdDeadEffect;
 
-    private bool isClick = false;
-    private Rigidbody2D rigi;
-    private SpringJoint2D springJoint;
-    private bool isUsed;
-    private BirdTrail birdTrail;
 
-    private void Awake()
+    protected bool isClick = false;
+    protected Rigidbody2D rigi;
+    protected SpringJoint2D springJoint;
+    protected bool isUsed;
+    protected BirdTrail birdTrail;
+    private CircleCollider2D circleCollider;
+
+    protected virtual void Awake()
     {
         if (!mainCamera)
         {
@@ -27,6 +29,7 @@ public class Bird : MonoBehaviour
 
         rigi = GetComponent<Rigidbody2D>();
         springJoint = GetComponent<SpringJoint2D>();
+        circleCollider = GetComponent<CircleCollider2D>();
         birdTrail = transform.GetComponentInChildren<BirdTrail>();
         if (!rightBranch)
         {
@@ -36,19 +39,21 @@ public class Bird : MonoBehaviour
         {
             leftBranch = GameObject.Find("Branch/Branch_Left").GetComponent<Branch>();
         }
-
+        circleCollider.enabled = false;
+        rigi.bodyType =  RigidbodyType2D.Static;
     }
 
-    private void OnMouseDown()
+    protected virtual void OnMouseDown()
     {
         if(!isUsed)
         {
             isClick = true;
             rigi.isKinematic = true;
+            MainGameManager.Instance.mainAudioManager.PlayAudio(AudioNames.birdSelect, transform.position);
         }
     }
 
-    private void OnMouseUp()
+    protected virtual void OnMouseUp()
     {
         if (!isUsed)
         {
@@ -59,7 +64,7 @@ public class Bird : MonoBehaviour
         }
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (isClick)
         {
@@ -88,7 +93,7 @@ public class Bird : MonoBehaviour
         }
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.collider.CompareTag(NameTagLayer.pig)
             || collision.collider.CompareTag(NameTagLayer.build))
@@ -97,7 +102,7 @@ public class Bird : MonoBehaviour
         }
     }
 
-    public void Enable(Vector3? vec3 = null)
+    public virtual void Enable(Vector3? vec3 = null)
     {
         if (vec3 != null)
         {
@@ -105,9 +110,11 @@ public class Bird : MonoBehaviour
         }
         enabled = true;
         springJoint.enabled = true;
+        circleCollider.enabled = true;
+        rigi.bodyType = RigidbodyType2D.Dynamic;
     }
 
-    private void Fly()
+    protected virtual void Fly()
     {
         if (rightBranch)
         {
@@ -120,9 +127,10 @@ public class Bird : MonoBehaviour
         birdTrail.ShowTrail();
         springJoint.enabled = false;
         Camera.main.GetComponent<CameraFollow>().SetTarget(transform);
+        MainGameManager.Instance.mainAudioManager.PlayAudio(AudioNames.birdFly, transform.position);
     }
 
-    private bool EndFly()
+    protected virtual bool EndFly()
     {
         if (isUsed && rigi.velocity.sqrMagnitude <= 0.1f)
         {
@@ -131,10 +139,11 @@ public class Bird : MonoBehaviour
         return false;
     }
 
-    private void Next()
+    protected virtual void Next()
     {
         Instantiate(birdDeadEffect, transform.position, Quaternion.identity);
         MainGameManager.Instance.MoveNextBird();
+        MainGameManager.Instance.mainAudioManager.PlayAudio(AudioNames.birdCollision01, transform.position);
         Destroy(gameObject);
     }
 
