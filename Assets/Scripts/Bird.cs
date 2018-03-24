@@ -83,6 +83,7 @@ public class Bird : MonoBehaviour
 
         if (EndFly())
         {
+            Camera.main.GetComponent<CameraFollow>().SetTarget(null);
             Next();
         }
     }
@@ -118,6 +119,7 @@ public class Bird : MonoBehaviour
         }
         birdTrail.ShowTrail();
         springJoint.enabled = false;
+        Camera.main.GetComponent<CameraFollow>().SetTarget(transform);
     }
 
     private bool EndFly()
@@ -135,6 +137,5 @@ public class Bird : MonoBehaviour
         MainGameManager.Instance.MoveNextBird();
         Destroy(gameObject);
     }
-
 
 }

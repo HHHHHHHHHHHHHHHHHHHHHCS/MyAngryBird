@@ -30,6 +30,7 @@ public class MainGameManager : MonoBehaviour
 
     private void Init()
     {
+
         InitCompents();
         InitBirds();
         InitPigs();
