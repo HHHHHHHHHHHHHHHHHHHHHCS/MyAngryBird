@@ -17,6 +17,8 @@ public class Bird : MonoBehaviour
     protected Rigidbody2D rigi;
     protected SpringJoint2D springJoint;
     protected bool isUsed;
+    protected bool isFlying;
+    protected bool isSkillUsed;
     protected BirdTrail birdTrail;
     private CircleCollider2D circleCollider;
 
@@ -40,12 +42,12 @@ public class Bird : MonoBehaviour
             leftBranch = GameObject.Find("Branch/Branch_Left").GetComponent<Branch>();
         }
         circleCollider.enabled = false;
-        rigi.bodyType =  RigidbodyType2D.Static;
+        rigi.bodyType = RigidbodyType2D.Static;
     }
 
     protected virtual void OnMouseDown()
     {
-        if(!isUsed)
+        if (!isUsed)
         {
             isClick = true;
             rigi.isKinematic = true;
@@ -86,8 +88,14 @@ public class Bird : MonoBehaviour
             }
         }
 
-        if (EndFly())
+        if (!isSkillUsed && isFlying && Input.GetMouseButtonDown(0))
         {
+            UseSkill();
+        }
+
+        if (CheckEndFly())
+        {
+            isFlying = false;
             Camera.main.GetComponent<CameraFollow>().SetTarget(null);
             Next();
         }
@@ -95,7 +103,7 @@ public class Bird : MonoBehaviour
 
     public virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.CompareTag(NameTagLayer.pig)
+        if (collision.collider.CompareTag(NameTagLayer.pig)
             || collision.collider.CompareTag(NameTagLayer.build))
         {
             birdTrail.ClearTrail();
@@ -124,16 +132,18 @@ public class Bird : MonoBehaviour
         {
             leftBranch.Disable();
         }
+        isFlying = true;
         birdTrail.ShowTrail();
         springJoint.enabled = false;
         Camera.main.GetComponent<CameraFollow>().SetTarget(transform);
         MainGameManager.Instance.mainAudioManager.PlayAudio(AudioNames.birdFly, transform.position);
     }
 
-    protected virtual bool EndFly()
+    protected virtual bool CheckEndFly()
     {
         if (isUsed && rigi.velocity.sqrMagnitude <= 0.1f)
         {
+
             return true;
         }
         return false;
@@ -147,4 +157,8 @@ public class Bird : MonoBehaviour
         Destroy(gameObject);
     }
 
+    protected virtual void UseSkill()
+    {
+        isSkillUsed = true;
+    }
 }
