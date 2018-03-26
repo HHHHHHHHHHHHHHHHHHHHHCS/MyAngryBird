@@ -11,6 +11,10 @@ public class Bird : MonoBehaviour
 
     [SerializeField]
     protected GameObject birdDeadEffect;
+    [SerializeField]
+    protected Sprite hurtImage;
+    [SerializeField]
+    protected Sprite skillUseImage;
 
 
     protected bool isClick = false;
@@ -19,8 +23,10 @@ public class Bird : MonoBehaviour
     protected bool isUsed;
     protected bool isFlying;
     protected bool isSkillUsed;
+    protected bool isHurt;
     protected BirdTrail birdTrail;
     private CircleCollider2D circleCollider;
+    protected SpriteRenderer spriteRender;
 
     protected virtual void Awake()
     {
@@ -32,6 +38,7 @@ public class Bird : MonoBehaviour
         rigi = GetComponent<Rigidbody2D>();
         springJoint = GetComponent<SpringJoint2D>();
         circleCollider = GetComponent<CircleCollider2D>();
+        spriteRender = GetComponent<SpriteRenderer>();
         birdTrail = transform.GetComponentInChildren<BirdTrail>();
         if (!rightBranch)
         {
@@ -62,6 +69,7 @@ public class Bird : MonoBehaviour
             isClick = false;
             rigi.isKinematic = false;
             isUsed = true;
+            isFlying = true;
             Invoke("Fly", 0.1f);
         }
     }
@@ -95,17 +103,21 @@ public class Bird : MonoBehaviour
 
         if (CheckEndFly())
         {
-            isFlying = false;
-            Camera.main.GetComponent<CameraFollow>().SetTarget(null);
             Next();
         }
     }
 
     public virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag(NameTagLayer.pig)
-            || collision.collider.CompareTag(NameTagLayer.build))
+        if (collision.collider.CompareTag(NameTagLayer.t_pig)
+            || collision.collider.CompareTag(NameTagLayer.t_block))
         {
+            isHurt = true;
+            if(hurtImage)
+            {
+                spriteRender.sprite = hurtImage;
+            }
+            collision.gameObject.GetComponent<EnemyUnit>().BirdCrash(rigi);
             birdTrail.ClearTrail();
         }
     }
@@ -132,7 +144,7 @@ public class Bird : MonoBehaviour
         {
             leftBranch.Disable();
         }
-        isFlying = true;
+
         birdTrail.ShowTrail();
         springJoint.enabled = false;
         Camera.main.GetComponent<CameraFollow>().SetTarget(transform);
@@ -143,14 +155,21 @@ public class Bird : MonoBehaviour
     {
         if (isUsed && rigi.velocity.sqrMagnitude <= 0.1f)
         {
-
-            return true;
+            RaycastHit2D ray = Physics2D.Raycast(transform.position, Vector2.down, 20f
+                ,LayerMask.GetMask(NameTagLayer.l_border));
+            if(ray.distance<=circleCollider.radius+0.1f)
+            {
+                return true;
+            }
+            return false;
         }
         return false;
     }
 
     protected virtual void Next()
     {
+        isFlying = false;
+        Camera.main.GetComponent<CameraFollow>().SetTarget(null);
         Instantiate(birdDeadEffect, transform.position, Quaternion.identity);
         MainGameManager.Instance.MoveNextBird();
         MainGameManager.Instance.mainAudioManager.PlayAudio(AudioNames.birdCollision01, transform.position);
@@ -160,5 +179,9 @@ public class Bird : MonoBehaviour
     protected virtual void UseSkill()
     {
         isSkillUsed = true;
+        if(isHurt&&skillUseImage)
+        {
+            spriteRender.sprite = skillUseImage;
+        }
     }
 }

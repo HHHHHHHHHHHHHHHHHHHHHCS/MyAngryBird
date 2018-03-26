@@ -13,7 +13,7 @@ public class Pig : EnemyUnit
         base.Hurt();
     }
 
-    protected override void Dead()
+    public override void Dead()
     {
         var effect = Instantiate(pigDeadEffect, transform.position, Quaternion.identity);
         Destroy(effect, 2f);

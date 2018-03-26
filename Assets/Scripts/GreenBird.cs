@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class YellowBird : Bird
+public class GreenBird : Bird
 {
-
-
     protected override void UseSkill()
     {
         base.UseSkill();
-        rigi.velocity *= 1.5f;
+        rigi.velocity *= -1;
     }
 }

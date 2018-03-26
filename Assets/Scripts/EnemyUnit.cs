@@ -23,14 +23,14 @@ public class EnemyUnit : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
     }
 
-    public virtual void OnCollisionEnter2D(Collision2D collision)
+    public virtual void BirdCrash(Rigidbody2D rigi)
     {
-        if (collision.relativeVelocity.sqrMagnitude > sqrMaxSpeed)
+        if (rigi.velocity.sqrMagnitude > sqrMaxSpeed)
         {
             //直接死亡
             Dead();
         }
-        else if (collision.relativeVelocity.sqrMagnitude < sqrMinSpeed)
+        else if (rigi.velocity.sqrMagnitude < sqrMinSpeed)
         {
             //直接不管
         }
@@ -54,7 +54,7 @@ public class EnemyUnit : MonoBehaviour
         isHurt = true;
     }
 
-    protected virtual void Dead()
+    public virtual void Dead()
     {
         Destroy(gameObject);
         var score = Instantiate(this.score, transform.position + Vector3.up, Quaternion.identity);

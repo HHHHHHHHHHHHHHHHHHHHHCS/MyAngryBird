@@ -7,6 +7,8 @@ TagManager:
   - Bird
   - Pig
   - Build
+  - Block
+  - Border
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Border
   - 
   - 
   - 

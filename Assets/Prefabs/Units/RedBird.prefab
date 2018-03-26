@@ -57,7 +57,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1403501202890892}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.705, y: -2.9, z: 0}
+  m_LocalPosition: {x: -6.023, y: -2.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4118939939235398}
@@ -196,6 +196,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   birdDeadEffect: {fileID: 1276135064398322, guid: 2ee1c262621988240b0c933c566f56e4,
     type: 2}
+  hurtImage: {fileID: 21300322, guid: 7f54faac0aa0f654bbbc596164481c55, type: 3}
+  skillUseImage: {fileID: 0}
 --- !u!212 &212914822868935744
 SpriteRenderer:
   m_ObjectHideFlags: 1
