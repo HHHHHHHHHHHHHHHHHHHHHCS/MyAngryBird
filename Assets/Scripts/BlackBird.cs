@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class BlackBird : Bird
 {
+    [SerializeField]
+    private Sprite boom;
+
     private HashSet<EnemyUnit> enemySet = new HashSet<EnemyUnit>();
+
+
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
