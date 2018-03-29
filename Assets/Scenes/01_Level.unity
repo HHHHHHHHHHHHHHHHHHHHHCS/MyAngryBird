@@ -344,6 +344,16 @@ Prefab:
       propertyPath: m_Navigation.m_Mode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114356870399039764, guid: 3f96723e4abce8f468fbd2f6b8fc9e74,
+        type: 2}
+      propertyPath: needStar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114356870399039764, guid: 3f96723e4abce8f468fbd2f6b8fc9e74,
+        type: 2}
+      propertyPath: maxStar
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3f96723e4abce8f468fbd2f6b8fc9e74, type: 2}
   m_IsPrefabParent: 0
@@ -1425,17 +1435,6 @@ Prefab:
       propertyPath: m_Name
       value: Level7
       objectReference: {fileID: 0}
-    - target: {fileID: 114238519124973158, guid: 3f96723e4abce8f468fbd2f6b8fc9e74,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300022, guid: 6c4914db8466e3a41a86efe040b0ba38,
-        type: 3}
-    - target: {fileID: 114375366680364988, guid: 3f96723e4abce8f468fbd2f6b8fc9e74,
-        type: 2}
-      propertyPath: m_Navigation.m_Mode
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3f96723e4abce8f468fbd2f6b8fc9e74, type: 2}
   m_IsPrefabParent: 0
@@ -1875,7 +1874,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1729604237}
   - component: {fileID: 1729604240}
-  - component: {fileID: 1729604239}
   - component: {fileID: 1729604238}
   m_Layer: 5
   m_Name: LevelScrollView
@@ -1909,33 +1907,11 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1729604236}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 39341a344045a344bbb0cc85228bff20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
---- !u!222 &1729604239
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1729604236}
 --- !u!114 &1729604240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2083,6 +2059,11 @@ Prefab:
         type: 2}
       propertyPath: m_Navigation.m_Mode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114356870399039764, guid: 3f96723e4abce8f468fbd2f6b8fc9e74,
+        type: 2}
+      propertyPath: maxStar
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3f96723e4abce8f468fbd2f6b8fc9e74, type: 2}
@@ -2308,11 +2289,6 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114375366680364988, guid: 3f96723e4abce8f468fbd2f6b8fc9e74,
-        type: 2}
-      propertyPath: m_Navigation.m_Mode
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3f96723e4abce8f468fbd2f6b8fc9e74, type: 2}
