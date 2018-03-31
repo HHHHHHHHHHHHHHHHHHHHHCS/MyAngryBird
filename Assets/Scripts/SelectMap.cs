@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class SelectMap : MonoBehaviour
 {
+    private int nowMap;
     private int needStar;
     private int maxStar;
-
     private int nowStar;
 
     private GameObject startBg;
@@ -15,8 +15,9 @@ public class SelectMap : MonoBehaviour
     private Text starText;
     private Text needStarText;
 
-    public void SetStarAndLock(int _needStar, int _maxStar)
+    public void SetStarAndLock(int _nowMap,int _needStar, int _maxStar, SelectMapManager manager)
     {
+        nowMap = _nowMap;
         startBg = transform.Find("StarBg").gameObject;
         lockBg = transform.Find("LockBg").gameObject;
         starText = transform.Find("StarBg/StarText").GetComponent<Text>();
@@ -25,10 +26,10 @@ public class SelectMap : MonoBehaviour
 
         needStar = _needStar;
         maxStar = _maxStar;
-        SetLock();
+        SetLock(manager);
     }
 
-    private void SetLock()
+    private void SetLock(SelectMapManager manager)
     {
         if (nowStar >= needStar)
         {
@@ -36,6 +37,8 @@ public class SelectMap : MonoBehaviour
             startBg.SetActive(true);
             lockBg.SetActive(false);
             SetStarText();
+            GetComponent<Button>().onClick.AddListener(
+                ()=> { OnClick(manager); });
         }
         else
         {
@@ -49,5 +52,10 @@ public class SelectMap : MonoBehaviour
     private void SetStarText()
     {
         starText.text = string.Format("{0}/{1}", nowStar, maxStar);
+    }
+
+    private void OnClick(SelectMapManager manager)
+    {
+        manager.ChooseMap(nowMap);
     }
 }
