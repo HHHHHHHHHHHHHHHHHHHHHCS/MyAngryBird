@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainAudioManager : MonoBehaviour
+public class GameAudioManager : MonoBehaviour
 {
     [SerializeField]
     protected AudioClip[] audioArray;
 
 
-    public MainAudioManager Init()
+    public GameAudioManager Init()
     {
         return this;
     }

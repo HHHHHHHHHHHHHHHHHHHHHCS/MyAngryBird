@@ -9,7 +9,7 @@ public class Pig : EnemyUnit
 
     protected override void Hurt()
     {
-        MainGameManager.Instance.mainAudioManager.PlayAudio(AudioNames.pigCollision01, transform.position);
+        GameGameManager.Instance.GameAudioManager.PlayAudio(AudioNames.pigCollision01, transform.position);
         base.Hurt();
     }
 
@@ -17,8 +17,8 @@ public class Pig : EnemyUnit
     {
         var effect = Instantiate(pigDeadEffect, transform.position, Quaternion.identity);
         Destroy(effect, 2f);
-        MainGameManager.Instance.mainAudioManager.PlayAudio(AudioNames.pigCollision02,transform.position);
-        MainGameManager.Instance.RemovePig(this);
+        GameGameManager.Instance.GameAudioManager.PlayAudio(AudioNames.pigCollision02,transform.position);
+        GameGameManager.Instance.RemovePig(this);
         base.Dead();
     }
 }

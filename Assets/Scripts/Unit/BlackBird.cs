@@ -43,7 +43,10 @@ public class BlackBird : Bird
         {
             foreach(var enemy in enemySet)
             {
-                enemy.Dead();
+                if(enemy)
+                {
+                    enemy.Dead();
+                }
             }
         }
         Next();

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainUIManager : MonoBehaviour
+public class GameUIManager : MonoBehaviour
 {
     private GameObject failPanel, succeedPanel;
 
-    public MainUIManager Init()
+    public GameUIManager Init()
     {
         failPanel = transform.Find(NameTagLayer.failPanel).gameObject;
         succeedPanel = transform.Find(NameTagLayer.scceedPanel).gameObject;

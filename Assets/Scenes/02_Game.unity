@@ -735,6 +735,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114163633546922600, guid: bb6b3097657c19a4aa0c3cb1b35b600c,
+        type: 2}
+      propertyPath: audioArray.Array.size
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4581173267808580, guid: bb6b3097657c19a4aa0c3cb1b35b600c, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -766,6 +771,10 @@ Prefab:
     - target: {fileID: 4581173267808580, guid: bb6b3097657c19a4aa0c3cb1b35b600c, type: 2}
       propertyPath: m_RootOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1956137013987120, guid: bb6b3097657c19a4aa0c3cb1b35b600c, type: 2}
+      propertyPath: m_Name
+      value: GameAudioManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bb6b3097657c19a4aa0c3cb1b35b600c, type: 2}
@@ -2604,6 +2613,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1650396835738650, guid: 4970f4535cab96a4288f698ddd35821f, type: 2}
+      propertyPath: m_Name
+      value: GameGameManager
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4970f4535cab96a4288f698ddd35821f, type: 2}
   m_IsPrefabParent: 0
@@ -2816,6 +2829,7 @@ MonoBehaviour:
     type: 2}
   hurtImage: {fileID: 21300222, guid: 7f54faac0aa0f654bbbc596164481c55, type: 3}
   skillUseImage: {fileID: 21300276, guid: 7f54faac0aa0f654bbbc596164481c55, type: 3}
+  boom: {fileID: 0}
 --- !u!1 &1627890019
 GameObject:
   m_ObjectHideFlags: 0

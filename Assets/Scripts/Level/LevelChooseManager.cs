@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class LevelChooseManager : MonoBehaviour
 {
-    public int[,] levelData = new int[7, 10];
+    public int[,] levelData;
 
     [SerializeField]
     private LevelButton levelButtonPrefab;
@@ -16,6 +16,8 @@ public class LevelChooseManager : MonoBehaviour
 
     private void Awake()
     {
+        //JsonManager.Instance.UpdateLevelStar(0,0,3);
+        levelData = JsonManager.Instance.ReadLevelStar();
         levelButtonSet = new HashSet<LevelButton>();
         selectMapManager = transform.parent.Find("MapScrollView").GetComponent<SelectMapManager>();
         prefabParent = transform.Find("LevelList");
@@ -27,15 +29,9 @@ public class LevelChooseManager : MonoBehaviour
                 selectMapManager.gameObject.SetActive(true);
             });
 
-        for (int y = 0; y < levelData.GetLength(0); y++)
-        {
-            for (int x = 0; x < levelData.GetLength(1); x++)
-            {
-                levelData[y, x] = x == 0 ? 0 : -1;
-            }
-        }
 
         gameObject.SetActive(false);
+
     }
 
     public void ChooseMap(int nowMap)
@@ -48,10 +44,10 @@ public class LevelChooseManager : MonoBehaviour
             }
         }
 
-        int nowLevel = 1;
+        int nowLevel = 0;
         foreach (var item in levelButtonSet)
         {
-            item.SetLevelAndStar(nowLevel, levelData[nowMap, nowLevel - 1]);
+            item.SetLevelAndStar(nowLevel + 1, levelData[nowMap, nowLevel]);
             nowLevel++;
         }
 

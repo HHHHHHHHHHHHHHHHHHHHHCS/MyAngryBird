@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainGameManager : MonoBehaviour
+public class GameGameManager : MonoBehaviour
 {
-    public static MainGameManager Instance
+    public static GameGameManager Instance
     {
         get;
         private set;
     }
 
-    public MainUIManager mainUIManager
+    public GameUIManager GameUIManager
     {
         get;
         private set;
     }
 
-    public MainAudioManager mainAudioManager
+    public GameAudioManager GameAudioManager
     {
         get;
         private set;
@@ -44,8 +44,8 @@ public class MainGameManager : MonoBehaviour
 
     private void InitCompents()
     {
-        mainUIManager = GameObject.Find("UIRoot").GetComponent<MainUIManager>().Init();
-        mainAudioManager = GameObject.Find("MainAudioManager").GetComponent<MainAudioManager>().Init();
+        GameUIManager = GameObject.Find("UIRoot").GetComponent<GameUIManager>().Init();
+        GameAudioManager = GameObject.Find("GameAudioManager").GetComponent<GameAudioManager>().Init();
     }
 
     private void InitBirds()
@@ -106,12 +106,12 @@ public class MainGameManager : MonoBehaviour
 
     private void FailGame()
     {
-        mainUIManager.ShowFailPanel();
+        GameUIManager.ShowFailPanel();
     }
 
     private void SucceedGame(int count = 0)
     {
-        mainUIManager.ShowSucceedPanel(Mathf.Clamp(count, 1, 3));
+        GameUIManager.ShowSucceedPanel(Mathf.Clamp(count, 1, 3));
     }
 
     public void RemovePig(Pig pig)
