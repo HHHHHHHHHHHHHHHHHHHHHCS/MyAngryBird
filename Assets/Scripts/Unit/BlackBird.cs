@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class BlackBird : Bird
 {
-    [SerializeField]
-    private Sprite boom;
-
     private HashSet<EnemyUnit> enemySet = new HashSet<EnemyUnit>();
 
 
@@ -26,12 +23,13 @@ public class BlackBird : Bird
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag(NameTagLayer.t_pig))
+        if (collision.CompareTag(NameTagLayer.t_pig)
+            || collision.CompareTag(NameTagLayer.t_block))
         {
-            var pig = collision.GetComponent<EnemyUnit>();
-            if (enemySet.Contains(pig))
+            var unit = collision.GetComponent<EnemyUnit>();
+            if (enemySet.Contains(unit))
             {
-                enemySet.Remove(pig);
+                enemySet.Remove(unit);
             }
         }
     }
@@ -41,12 +39,19 @@ public class BlackBird : Bird
         base.UseSkill();
         if(enemySet.Count>0)
         {
-            foreach(var enemy in enemySet)
+            int index= 0;
+            EnemyUnit[] units = new EnemyUnit[enemySet.Count];
+            foreach (var enemy in enemySet)
             {
                 if(enemy)
                 {
-                    enemy.Dead();
-                }
+                    units[index++] = enemy;
+
+                } 
+            }
+            for(int i=0;i< index;i++)
+            {
+                units[i].Dead();
             }
         }
         Next();

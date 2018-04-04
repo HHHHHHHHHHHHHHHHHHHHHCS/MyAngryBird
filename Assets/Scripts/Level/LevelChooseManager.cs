@@ -13,6 +13,7 @@ public class LevelChooseManager : MonoBehaviour
     private Transform prefabParent;
     private HashSet<LevelButton> levelButtonSet;
     private SelectMapManager selectMapManager;
+    private int nowMap;
 
     private void Awake()
     {
@@ -34,8 +35,9 @@ public class LevelChooseManager : MonoBehaviour
 
     }
 
-    public void ChooseMap(int nowMap)
+    public void ChooseMap(int _nowMap)
     {
+        nowMap = _nowMap;
         if (levelButtonSet.Count <= 0)
         {
             for (int i = 0; i < levelData.GetLength(1); i++)
@@ -47,9 +49,14 @@ public class LevelChooseManager : MonoBehaviour
         int nowLevel = 0;
         foreach (var item in levelButtonSet)
         {
-            item.SetLevelAndStar(nowLevel + 1, levelData[nowMap, nowLevel]);
+            item.SetLevelAndStar(this, nowLevel, levelData[_nowMap, nowLevel]);
             nowLevel++;
         }
+    }
 
+    public void ClickLevelButton(int nowLevel)
+    {
+        GameGameManager.SetNowMapAndLevel(nowMap, nowLevel);
+        GameSceneManager.LoadGame(nowMap , nowLevel+1);
     }
 }

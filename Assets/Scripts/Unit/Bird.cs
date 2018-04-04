@@ -17,6 +17,7 @@ public class Bird : MonoBehaviour
     protected Sprite skillUseImage;
 
 
+
     protected bool isClick = false;
     protected Rigidbody2D rigi;
     protected SpringJoint2D springJoint;
@@ -27,6 +28,7 @@ public class Bird : MonoBehaviour
     protected BirdTrail birdTrail;
     private CircleCollider2D circleCollider;
     protected SpriteRenderer spriteRender;
+    protected Vector3 lastPos = new Vector3(-1000,-1000,-1000);
 
     protected virtual void Awake()
     {
@@ -149,6 +151,7 @@ public class Bird : MonoBehaviour
         springJoint.enabled = false;
         Camera.main.GetComponent<CameraFollow>().SetTarget(transform);
         GameGameManager.Instance.GameAudioManager.PlayAudio(AudioNames.birdFly, transform.position);
+        InvokeRepeating("StayOnePoint", 0, 1);
     }
 
     protected virtual bool CheckEndFly()
@@ -164,6 +167,18 @@ public class Bird : MonoBehaviour
             return false;
         }
         return false;
+    }
+
+    protected virtual void StayOnePoint()
+    {
+        if(Vector3.SqrMagnitude(transform.position-lastPos)>=0.1f)
+        {
+            lastPos = transform.position;
+        }
+        else
+        {
+            Next();
+        }
     }
 
     protected virtual void Next()

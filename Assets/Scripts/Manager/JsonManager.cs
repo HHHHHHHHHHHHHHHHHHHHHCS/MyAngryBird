@@ -162,14 +162,18 @@ public class JsonManager
     {
         JObject jo = JObject.Parse(Read());
         var array = ReadLevelStar();
-        array[nowMap, nowLevel] = star;
-        if (autoUnlock && nowLevel + 1 < maxLevelCount
-            && star > 0 && array[nowMap , nowLevel+1] < 0)
+        if (star > array[nowMap, nowLevel])
         {
-            array[nowMap, nowLevel + 1] = 0;
+            array[nowMap, nowLevel] = star;
+            if (autoUnlock && nowLevel + 1 < maxLevelCount
+                && star > 0 && array[nowMap, nowLevel + 1] < 0)
+            {
+                array[nowMap, nowLevel + 1] = 0;
+            }
+            jo[_levelStar] = JToken.Parse(MakeJson(array));
+            return !string.IsNullOrEmpty(UpdateData(jo));
         }
-        jo[_levelStar] = JToken.Parse(MakeJson(array));
-        return !string.IsNullOrEmpty(UpdateData(jo));
+        return false;
     }
 
     #endregion

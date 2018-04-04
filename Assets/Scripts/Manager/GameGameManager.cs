@@ -22,11 +22,19 @@ public class GameGameManager : MonoBehaviour
         private set;
     }
 
+    private static int nowMap = -1, nowLevel = -1;
 
     private List<Bird> birdsList;
     private List<Pig> pigsList;
 
+
     private Vector3 birdPos;
+
+    public static void SetNowMapAndLevel(int _nowMap, int _nowLevel)
+    {
+        nowMap = _nowMap;
+        nowLevel = _nowLevel;
+    }
 
     private void Awake()
     {
@@ -109,9 +117,15 @@ public class GameGameManager : MonoBehaviour
         GameUIManager.ShowFailPanel();
     }
 
-    private void SucceedGame(int count = 0)
+    private void SucceedGame(int count)
     {
-        GameUIManager.ShowSucceedPanel(Mathf.Clamp(count, 1, 3));
+        count = Mathf.Clamp(count, 1, 3);
+        if (nowMap >= 0 && nowLevel >= 0)
+        {
+            JsonManager.Instance.UpdateLevelStar(nowMap, nowLevel, count);
+        }
+
+        GameUIManager.ShowSucceedPanel(count);
     }
 
     public void RemovePig(Pig pig)

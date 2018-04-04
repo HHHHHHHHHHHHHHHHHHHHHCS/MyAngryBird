@@ -9,6 +9,6 @@ public class YellowBird : Bird
     protected override void UseSkill()
     {
         base.UseSkill();
-        rigi.velocity *= 1.5f;
+        rigi.velocity = new Vector2(2 * rigi.velocity.x, rigi.velocity.y);
     }
 }

@@ -14,7 +14,7 @@ public class EnemyUnit : MonoBehaviour
 
 
     protected bool isHurt = false;
-
+    protected bool isDead = false;
 
     protected SpriteRenderer sprite;
 
@@ -56,8 +56,12 @@ public class EnemyUnit : MonoBehaviour
 
     public virtual void Dead()
     {
-        Destroy(gameObject);
-        var score = Instantiate(this.score, transform.position + Vector3.up, Quaternion.identity);
-        Destroy(score, 2f);
+        if(!isDead)
+        {
+            var newScore = Instantiate(score, transform.position + Vector3.up, Quaternion.identity);
+            Destroy(newScore, 2f);
+            Destroy(gameObject);
+            isDead = true;
+        }
     }
 }
