@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameSceneManager
 {
-    public const string loadingScene = "00_Loading";
-    public const string levelScene = "01_Level";
+    public const string mapLoadingScene = "00_MapLoading";
+    public const string mapLevelScene = "01_MapLevel";
+    public const string gamelLoadingScene = "02_GamelLoading";
     public const string gameScene = "Game_{0:D2}_{1:D2}";
 
     public static void ReLoad()
@@ -16,17 +17,46 @@ public class GameSceneManager
 
     public static void LoadHome()
     {
-        SceneManager.LoadScene(levelScene);
+        SceneManager.LoadScene(mapLoadingScene);
     }
 
-    public static void LoadGame(int map,int level)
+    public static void AsyncLoadMapLevelScene()
+    {
+        var mAsyncOperation = SceneManager.LoadSceneAsync(mapLevelScene);
+        mAsyncOperation.allowSceneActivation = true;
+    }
+
+    public static bool LoadGamelLoading(int map, int level)
     {
         string sceneName = string.Format(gameScene, map, level);
-        var scene = SceneManager.GetSceneByName(sceneName);
-        if (scene != null)
+        if (level<JsonManager.Instance.ReadMaxLevelCount())
         {
-            SceneManager.LoadScene(sceneName);
+            LevelLoading.SetNowMapAndLevel(sceneName);
+            SceneManager.LoadScene(gamelLoadingScene);
+            return true;
         }
+        return false;
+    }
 
+    //public static void LoadLevelGame(int map, int level)
+    //{
+    //    string sceneName = string.Format(gameScene, map, level);
+    //    var scene = SceneManager.GetSceneByName(sceneName);
+    //    if (scene != null)
+    //    {
+    //        SceneManager.LoadScene(sceneName);
+    //    }
+    //}
+
+    public static AsyncOperation AsyncLoadLevelGameScene(string sceneName)
+    {
+        //var scene = SceneManager.GetSceneByName(sceneName);
+        //if (scene != null)
+        //{
+        var asyncOperation = SceneManager.LoadSceneAsync(sceneName);
+        asyncOperation.allowSceneActivation = false;
+        return asyncOperation;
+        //}
+        //return null;
     }
 }

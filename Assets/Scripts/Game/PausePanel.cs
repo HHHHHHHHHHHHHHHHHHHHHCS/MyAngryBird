@@ -29,13 +29,13 @@ public class PausePanel : MonoBehaviour
     public void ClickRetryButton()
     {
         Time.timeScale = 1;
-        GameSceneManager.ReLoad();
+        GameGameManager.Instance.GameUIManager.ClickRetryButton();
     }
 
     public void ClickHomeButton()
     {
         Time.timeScale = 1;
-        GameSceneManager.LoadHome();
+        GameGameManager.Instance.GameUIManager.ClickHomeButton();
     }
 
     /// <summary>

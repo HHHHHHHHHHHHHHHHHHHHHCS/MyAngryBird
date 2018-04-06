@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -55,6 +56,7 @@ public class GameGameManager : MonoBehaviour
         GameUIManager = GameObject.Find("UIRoot").GetComponent<GameUIManager>().Init();
         GameAudioManager = GameObject.Find("GameAudioManager").GetComponent<GameAudioManager>().Init();
     }
+
 
     private void InitBirds()
     {
@@ -131,5 +133,15 @@ public class GameGameManager : MonoBehaviour
     public void RemovePig(Pig pig)
     {
         pigsList.Remove(pig);
+    }
+
+
+    public void LoadNextLevel()
+    {
+    
+        if(!GameSceneManager.LoadGamelLoading(nowMap, nowLevel + 1))
+        {
+            GameSceneManager.LoadHome();
+        }
     }
 }

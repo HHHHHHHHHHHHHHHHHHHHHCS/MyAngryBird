@@ -143,14 +143,14 @@ public class JsonManager
         return GetData<int[]>(jo[_needStar].ToString());
     }
 
-    public bool UnlockAllNeedStar()
-    {
-
-        int[] needStar = new int[maxMapCount];
-        JObject jo = JObject.Parse(Read());
-        jo[_needStar] = JToken.Parse(MakeJson(needStar));
-        return !string.IsNullOrEmpty(UpdateData(jo));
-    }
+    //public bool UnlockAllNeedStar()
+    //{
+    //
+    //    int[] needStar = new int[maxMapCount];
+    //    JObject jo = JObject.Parse(Read());
+    //    jo[_needStar] = JToken.Parse(MakeJson(needStar));
+    //    return !string.IsNullOrEmpty(UpdateData(jo));
+    //}
 
     public int[,] ReadLevelStar()
     {
@@ -174,6 +174,14 @@ public class JsonManager
             return !string.IsNullOrEmpty(UpdateData(jo));
         }
         return false;
+    }
+
+
+    public int ReadMaxLevelCount()
+    {
+        JObject jo = JObject.Parse(Read());
+        var array = ReadLevelStar();
+        return array.GetLength(1);
     }
 
     #endregion

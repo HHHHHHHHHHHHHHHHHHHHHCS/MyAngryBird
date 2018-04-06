@@ -57,6 +57,6 @@ public class LevelChooseManager : MonoBehaviour
     public void ClickLevelButton(int nowLevel)
     {
         GameGameManager.SetNowMapAndLevel(nowMap, nowLevel);
-        GameSceneManager.LoadGame(nowMap , nowLevel+1);
+        GameSceneManager.LoadGamelLoading(nowMap , nowLevel);
     }
 }

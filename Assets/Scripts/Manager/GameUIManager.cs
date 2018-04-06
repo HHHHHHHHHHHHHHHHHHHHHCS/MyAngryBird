@@ -34,5 +34,20 @@ public class GameUIManager : MonoBehaviour
             .SetActive(true);
     }
 
+    public void ClickHomeButton()
+    {
+        GameSceneManager.LoadHome();
+    }
+
+
+    public void ClickNextButton()
+    {
+        GameGameManager.Instance.LoadNextLevel();
+    }
+
+    public void ClickRetryButton()
+    {
+        GameSceneManager.ReLoad();
+    }
 
 }
