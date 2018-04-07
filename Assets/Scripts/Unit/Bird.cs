@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Bird : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class Bird : MonoBehaviour
     protected BirdTrail birdTrail;
     private CircleCollider2D circleCollider;
     protected SpriteRenderer spriteRender;
-    protected Vector3 lastPos = new Vector3(-1000,-1000,-1000);
+    protected Vector3 lastPos = new Vector3(-1000, -1000, -1000);
 
     protected virtual void Awake()
     {
@@ -80,14 +81,26 @@ public class Bird : MonoBehaviour
     {
         if (isClick)
         {
-            transform.position = mainCamera.ScreenToWorldPoint(Input.mousePosition)
-                - new Vector3(0, 0, mainCamera.transform.position.z);
+            Vector3 wantPos =  mainCamera.ScreenToWorldPoint(Input.mousePosition)
+                 - new Vector3(0, 0, mainCamera.transform.position.z);
+            if (CheckGround(wantPos))
+            {
+                transform.position = lastPos;
+            }
+            else
+            {
+                transform.position = wantPos;
+            }
             if (Vector3.Distance(transform.position, rightBranch.transform.position) >= maxDistance)
             {//进行位置限定
                 Vector3 vec3 = (transform.position - rightBranch.transform.position).normalized * maxDistance
                     + rightBranch.transform.position;  //单位化*最大长度+初始位置
                 transform.position = vec3;
             }
+            lastPos = transform.position;
+
+
+
             if (rightBranch)
             {
                 rightBranch.DrawLine(transform);
@@ -98,7 +111,8 @@ public class Bird : MonoBehaviour
             }
         }
 
-        if (!isSkillUsed && isFlying && Input.GetMouseButtonDown(0))
+        if (!isSkillUsed && isFlying && Input.GetMouseButtonDown(0)
+            && !EventSystem.current.IsPointerOverGameObject())
         {
             UseSkill();
         }
@@ -115,13 +129,28 @@ public class Bird : MonoBehaviour
             || collision.collider.CompareTag(NameTagLayer.t_block))
         {
             isHurt = true;
-            if(hurtImage)
+            if (hurtImage)
             {
                 spriteRender.sprite = hurtImage;
             }
             collision.gameObject.GetComponent<EnemyUnit>().BirdCrash(rigi);
             birdTrail.ClearTrail();
         }
+    }
+
+    protected virtual bool CheckGround(Vector3? pos=null)
+    {
+        if(pos==null)
+        {
+            pos = transform.position;
+        }
+        RaycastHit2D ray = Physics2D.Raycast((Vector2)pos, Vector2.down, 5f
+            , LayerMask.GetMask(NameTagLayer.l_border));
+        if (ray.distance <= circleCollider.radius+0.01f )
+        {
+            return true;
+        }
+        return false;
     }
 
     public virtual void Enable(Vector3? vec3 = null)
@@ -158,20 +187,14 @@ public class Bird : MonoBehaviour
     {
         if (isUsed && rigi.velocity.sqrMagnitude <= 0.2f)
         {
-            RaycastHit2D ray = Physics2D.Raycast(transform.position, Vector2.down, 20f
-                ,LayerMask.GetMask(NameTagLayer.l_border));
-            if(ray.distance<=circleCollider.radius+0.1f)
-            {
-                return true;
-            }
-            return false;
+            return CheckGround();
         }
         return false;
     }
 
     protected virtual void StayOnePoint()
     {
-        if(Vector3.SqrMagnitude(transform.position-lastPos)>=0.1f)
+        if (Vector3.SqrMagnitude(transform.position - lastPos) >= 0.1f)
         {
             lastPos = transform.position;
         }
@@ -194,7 +217,7 @@ public class Bird : MonoBehaviour
     protected virtual void UseSkill()
     {
         isSkillUsed = true;
-        if(isHurt&&skillUseImage)
+        if (isHurt && skillUseImage)
         {
             spriteRender.sprite = skillUseImage;
         }

@@ -530,13 +530,7 @@ Prefab:
       propertyPath: m_ConnectedRigidBody
       value: 
       objectReference: {fileID: 1213226038}
-    - target: {fileID: 58875158015068018, guid: 8f12bd83ef496ba44ad3eddf2bf676bd,
-        type: 2}
-      propertyPath: m_Radius
-      value: 0.9
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114985178438906736, guid: 8f12bd83ef496ba44ad3eddf2bf676bd, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8f12bd83ef496ba44ad3eddf2bf676bd, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &279051638
@@ -2938,26 +2932,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4773937884319130, guid: ea51ec4ef5b713c4386d4ea9741264ca,
     type: 2}
   m_PrefabInternal: {fileID: 695763651}
---- !u!1 &1541210001 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1488357941571526, guid: 8f12bd83ef496ba44ad3eddf2bf676bd,
-    type: 2}
-  m_PrefabInternal: {fileID: 245544807}
---- !u!114 &1541210002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1541210001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 488cd4df3a20ddd408580cea44a1dba8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  birdDeadEffect: {fileID: 1276135064398322, guid: 2ee1c262621988240b0c933c566f56e4,
-    type: 2}
-  hurtImage: {fileID: 21300222, guid: 7f54faac0aa0f654bbbc596164481c55, type: 3}
-  skillUseImage: {fileID: 21300276, guid: 7f54faac0aa0f654bbbc596164481c55, type: 3}
 --- !u!4 &1594056033 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4773937884319130, guid: ea51ec4ef5b713c4386d4ea9741264ca,

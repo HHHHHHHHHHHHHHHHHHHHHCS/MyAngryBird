@@ -5,7 +5,20 @@ using UnityEngine;
 public class BlackBird : Bird
 {
     private HashSet<EnemyUnit> enemySet = new HashSet<EnemyUnit>();
+    private CircleCollider2D boomCollider;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        boomCollider = GetComponents<CircleCollider2D>()[1];
+        boomCollider.enabled = false;
+    }
+
+    protected override void Fly()
+    {
+        base.Fly();
+        boomCollider.enabled = true;
+    }
 
 
     public void OnTriggerEnter2D(Collider2D collision)

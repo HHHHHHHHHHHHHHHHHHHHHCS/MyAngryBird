@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 231785172726462998}
   - component: {fileID: 58711388945775378}
   - component: {fileID: 58875158015068018}
-  - component: {fileID: 114985178438906736}
+  - component: {fileID: 114040309948439918}
   m_Layer: 0
   m_Name: BlackBird
   m_TagString: Bird
@@ -168,7 +168,22 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 0.9
+--- !u!114 &114040309948439918
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1488357941571526}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 488cd4df3a20ddd408580cea44a1dba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  birdDeadEffect: {fileID: 1276135064398322, guid: 2ee1c262621988240b0c933c566f56e4,
+    type: 2}
+  hurtImage: {fileID: 21300222, guid: 7f54faac0aa0f654bbbc596164481c55, type: 3}
+  skillUseImage: {fileID: 21300276, guid: 7f54faac0aa0f654bbbc596164481c55, type: 3}
 --- !u!114 &114584569800101220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -199,21 +214,6 @@ MonoBehaviour:
   desiredTime: 2
   startColor: {r: 1, g: 1, b: 1, a: 1}
   endColor: {r: 1, g: 1, b: 1, a: 0}
---- !u!114 &114985178438906736
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1488357941571526}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0f5c42f75ee3dd45b7090cd30c19c21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  birdDeadEffect: {fileID: 1276135064398322, guid: 2ee1c262621988240b0c933c566f56e4,
-    type: 2}
-  hurtImage: {fileID: 21300322, guid: 7f54faac0aa0f654bbbc596164481c55, type: 3}
-  skillUseImage: {fileID: 0}
 --- !u!212 &212583228779499646
 SpriteRenderer:
   m_ObjectHideFlags: 1

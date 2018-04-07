@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class GameUIManager : MonoBehaviour
 {
-    private GameObject failPanel, succeedPanel;
+    private GameObject failPanel, succeedPanel,pauseButton;
 
     public GameUIManager Init()
     {
-        failPanel = transform.Find(NameTagLayer.failPanel).gameObject;
-        succeedPanel = transform.Find(NameTagLayer.scceedPanel).gameObject;
+        failPanel = transform.Find(NameTagLayer.failPanelPath).gameObject;
+        succeedPanel = transform.Find(NameTagLayer.scceedPanelPath).gameObject;
+        pauseButton=transform.Find(NameTagLayer.pauseButton).gameObject;
         return this;
     }
 
     public void ShowFailPanel()
     {
+        pauseButton.SetActive(false);
         failPanel.SetActive(true);
     }
 
@@ -30,7 +32,7 @@ public class GameUIManager : MonoBehaviour
     private IEnumerator ShowStart(int i, float time)
     {
         yield return new WaitForSeconds(time);
-        succeedPanel.transform.Find(NameTagLayer.starImage + i.ToString()).gameObject
+        succeedPanel.transform.Find(NameTagLayer.starImagePath + i.ToString()).gameObject
             .SetActive(true);
     }
 
